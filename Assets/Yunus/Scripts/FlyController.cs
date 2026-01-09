@@ -7,15 +7,9 @@ public class BirdFlightController : MonoBehaviour
     public float moveSpeed = 7f;
     public float acceleration = 10f;
 
-    [Header("Idle Vertical Float")]
+    [Header("Idle Float")]
     public float idleFloatAmplitude = 0.08f;
     public float idleFloatSpeed = 2f;
-
-    [Header("Direction Sprites")]
-    public Sprite upSprite;
-    public Sprite downSprite;
-    public Sprite leftSprite;
-    public Sprite rightSprite;
 
     Rigidbody2D rb;
     Vector2 input;
@@ -24,14 +18,14 @@ public class BirdFlightController : MonoBehaviour
     Vector3 visualStartLocalPos;
 
     [SerializeField] Transform visual;
-    SpriteRenderer sr;
+    
+    [SerializeField] SpriteRenderer sr;
+    [SerializeField] Animator animator;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        sr = visual.GetComponent<SpriteRenderer>();
-
+        animator = visual.GetComponent<Animator>();
         visualStartLocalPos = visual.localPosition;
     }
 
@@ -41,7 +35,7 @@ public class BirdFlightController : MonoBehaviour
         input.y = Input.GetAxisRaw("Vertical");
         input.Normalize();
 
-        UpdateDirectionSprite();
+        UpdateAnimator();
     }
 
     void FixedUpdate()
@@ -60,6 +54,24 @@ public class BirdFlightController : MonoBehaviour
         HandleIdleVerticalFloat();
     }
 
+    void UpdateAnimator()
+    {
+        float absX = Mathf.Abs(input.x);
+        float absY = Mathf.Abs(input.y);
+
+        animator.SetFloat("MoveX", input.x);
+        animator.SetFloat("MoveY", input.y);
+        animator.SetBool("Horizontal", Mathf.Abs(input.x) > Mathf.Abs(input.y));
+
+        if (input.x > 0.1f)
+            sr.flipX = false;
+        else if (input.x < -0.1f)
+            sr.flipX = true;
+
+        // yön önceliği kodda
+        animator.SetBool("Horizontal", absX > absY);
+    }
+
     void HandleIdleVerticalFloat()
     {
         if (rb.linearVelocity.magnitude < 0.1f)
@@ -76,20 +88,6 @@ public class BirdFlightController : MonoBehaviour
                 visualStartLocalPos,
                 10f * Time.deltaTime
             );
-        }
-    }
-
-    void UpdateDirectionSprite()
-    {
-        if (input == Vector2.zero) return;
-
-        if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
-        {
-            sr.sprite = input.x > 0 ? rightSprite : leftSprite;
-        }
-        else
-        {
-            sr.sprite = input.y > 0 ? upSprite : downSprite;
         }
     }
 }
