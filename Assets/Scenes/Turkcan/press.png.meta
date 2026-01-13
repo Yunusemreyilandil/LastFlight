@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 4774e49524a041f418c77293fdf36027
+guid: ca9edaeff8f9f0845a8887ef1efd208a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5050120946963162974
-    second: Press e_0
+      213: -466993739257667112
+    second: press_0
   - first:
-      213: -6881604960019525282
-    second: Press e_1
+      213: 777706831141516168
+    second: press_1
   - first:
-      213: 9030018422912312709
-    second: Press e_2
+      213: -7199176089362998314
+    second: press_2
   - first:
-      213: -6650615782349446254
-    second: Press e_3
+      213: 3430870851346760406
+    second: press_3
   - first:
-      213: -934019330901386889
-    second: Press e_4
+      213: -2715439387785434790
+    second: press_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,7 +96,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Standalone
+    buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -122,7 +122,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: iOS
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -151,133 +151,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Press e_0
+      name: press_0
       rect:
         serializedVersion: 2
-        x: 378
-        y: 477
-        width: 410
-        height: 98
+        x: 132
+        y: 162
+        width: 145
+        height: 36
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e57af7c9e32a51640800000000000000
-      internalID: 5050120946963162974
+      spriteID: 8d1273b1ba7e489f0800000000000000
+      internalID: -466993739257667112
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Press e_1
+      name: press_1
       rect:
         serializedVersion: 2
-        x: 843
-        y: 466
-        width: 98
-        height: 118
+        x: 295
+        y: 158
+        width: 36
+        height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e515879cfb0af70a0800000000000000
-      internalID: -6881604960019525282
+      spriteID: 883b5911e38faca00800000000000000
+      internalID: 777706831141516168
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Press e_2
+      name: press_2
       rect:
         serializedVersion: 2
-        x: 989
-        y: 475
-        width: 169
-        height: 97
+        x: 346
+        y: 162
+        width: 60
+        height: 35
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 585ebec99e1115d70800000000000000
-      internalID: 9030018422912312709
+      spriteID: 6db58065d73671c90800000000000000
+      internalID: -7199176089362998314
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Press e_3
+      name: press_3
       rect:
         serializedVersion: 2
-        x: 1215
-        y: 476
-        width: 327
-        height: 97
+        x: 425
+        y: 162
+        width: 116
+        height: 35
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2936473be2444b3a0800000000000000
-      internalID: -6650615782349446254
+      spriteID: 6d204cc9cd6ec9f20800000000000000
+      internalID: 3430870851346760406
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Press e_4
+      name: press_4
       rect:
         serializedVersion: 2
-        x: 577
-        y: 348
-        width: 773
-        height: 88
+        x: 201
+        y: 114
+        width: 273
+        height: 36
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 77956400e52b903f0800000000000000
-      internalID: -934019330901386889
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Press e_5
-      rect:
-        serializedVersion: 2
-        x: 378
-        y: 331
-        width: 1161
-        height: 246
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 3, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c6dacc399490a8b4eab620f2aa1ab703
-      internalID: 1399440185
+      spriteID: a59e1f98342d05ad0800000000000000
+      internalID: -2715439387785434790
       vertices: []
       indices: 
       edges: []
@@ -296,12 +274,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Press e_0: 5050120946963162974
-      Press e_1: -6881604960019525282
-      Press e_2: 9030018422912312709
-      Press e_3: -6650615782349446254
-      Press e_4: -934019330901386889
-      Press e_5: 1399440185
+      press_0: -466993739257667112
+      press_1: 777706831141516168
+      press_2: -7199176089362998314
+      press_3: 3430870851346760406
+      press_4: -2715439387785434790
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
