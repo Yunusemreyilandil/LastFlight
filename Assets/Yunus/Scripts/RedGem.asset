@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2d5f77aba6dc224e87532d6dfc0f132, type: 3}
+  m_Name: RedGem
+  m_EditorClassIdentifier: 
+  gemName: RedGem
+  icon: {fileID: 7774493202208912350, guid: cee0bed35e8aa69488051373399fec52, type: 3}
+  gemPrefab: {fileID: 8517289521321759108, guid: 41a18e80e6b3cfc4c8afc44eac4c2e85,
+    type: 3}
+  orbitRadius: 2
+  orbitSpeed: 2
+  orbitHeight: 1

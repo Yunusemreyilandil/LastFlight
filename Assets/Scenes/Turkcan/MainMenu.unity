@@ -179,7 +179,7 @@ MonoBehaviour:
   exitButton: {fileID: 507912137}
   mainMenuPanel: {fileID: 6521672}
   settingsPanel: {fileID: 1520817350}
-  gameSceneName: GameScene
+  gameSceneName: TestScene
 --- !u!114 &6521675
 MonoBehaviour:
   m_ObjectHideFlags: 0

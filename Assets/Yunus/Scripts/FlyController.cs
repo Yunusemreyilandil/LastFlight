@@ -39,6 +39,7 @@ public class BirdFlightController : MonoBehaviour
     [SerializeField] SpriteRenderer sr;
     [SerializeField] Animator animator;
 
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -80,7 +81,7 @@ public class BirdFlightController : MonoBehaviour
     void LateUpdate()
         {
             HandleIdleVerticalFloat();
-        }
+    }
 
         void UpdateAnimator()
         {
@@ -149,5 +150,7 @@ public class BirdFlightController : MonoBehaviour
             staminaUISpeed * Time.deltaTime
         );
     }
+
+   
 }
 

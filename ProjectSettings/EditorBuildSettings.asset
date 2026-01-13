@@ -4,7 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Turkcan/MainMenu.unity
+    guid: 96866f4d0a647d74bb29ac02f23abe99
+  - enabled: 1
+    path: Assets/Yunus/Scenes/TestScene.unity
+    guid: 2e2eb7908a80cea448521b9fd0e6cd70
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 6f2e94421ee6a854fbc5733ea9fda323,
       type: 3}
