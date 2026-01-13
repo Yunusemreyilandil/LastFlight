@@ -1,15 +1,12 @@
 using UnityEngine;
 
-public class StatueInventoryTrigger : MonoBehaviour
+public class StatueGemInteractor : MonoBehaviour
 {
-    public GameObject gemUIRoot;
+    [Header("UI")]
+    [SerializeField] private GameObject inventoryUI;
 
-    private bool playerInside;
-
-    void Start()
-    {
-        gemUIRoot.SetActive(false);
-    }
+    private bool playerInside = false;
+    private bool inventoryOpen = false;
 
     void Update()
     {
@@ -17,24 +14,23 @@ public class StatueInventoryTrigger : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            gemUIRoot.SetActive(!gemUIRoot.activeSelf);
+            inventoryOpen = !inventoryOpen;
+            inventoryUI.SetActive(inventoryOpen);
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInside = true;
-        }
+        if (!other.CompareTag("Player")) return;
+        playerInside = true;
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInside = false;
-            gemUIRoot.SetActive(false);
-        }
+        if (!other.CompareTag("Player")) return;
+
+        playerInside = false;
+        inventoryOpen = false;
+        inventoryUI.SetActive(false);
     }
 }

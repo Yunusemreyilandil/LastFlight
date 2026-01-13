@@ -62,5 +62,8 @@ TagManager:
   - name: New Layer 7
     uniqueID: 608673983
     locked: 0
+  - name: Bird Layer
+    uniqueID: 305946575
+    locked: 0
   m_RenderingLayers:
   - Default
