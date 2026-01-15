@@ -2728,8 +2728,8 @@ MonoBehaviour:
   musicSource: {fileID: 2082593371}
   menuMusic: {fileID: 8300000, guid: f080d16594288fa4380006e041806167, type: 3}
   sfxSource: {fileID: 2082593370}
-  buttonClickSound: {fileID: 8300000, guid: 605ae6467bc5f9d499b82c71a1c348ba, type: 3}
-  buttonHoverSound: {fileID: 8300000, guid: 416aea591a5ae4f4ab5961cdfe055b8b, type: 3}
+  buttonClickSound: {fileID: 8300000, guid: b6a6f539066babb49b6a272e11457bfb, type: 3}
+  buttonHoverSound: {fileID: 8300000, guid: 24be199d43ab3fd43ab573dc56bcbd2c, type: 3}
   musicVolume: 0.5
   sfxVolume: 1
 --- !u!4 &2082593373
