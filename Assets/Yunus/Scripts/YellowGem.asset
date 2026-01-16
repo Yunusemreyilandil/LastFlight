@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gemName: YellowGem
   icon: {fileID: -7201844964380194046, guid: 4f40aa6e853dd584fa8e9cfb97799857, type: 3}
-  gemPrefab: {fileID: 4740944183212829151, guid: abea8f5ca76aaac4ba749f08c37c2037,
+  gemPrefab: {fileID: 1738633357821618421, guid: 02f07bd546d0a014a827075ab8ce784d,
     type: 3}
   orbitRadius: 2
   orbitSpeed: 2
