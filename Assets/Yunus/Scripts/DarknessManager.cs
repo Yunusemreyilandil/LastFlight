@@ -6,8 +6,11 @@ using UnityEngine.Tilemaps;
 public class DarknessSpreadController : MonoBehaviour
 {
     [Header("Tilemaps")]
-    [Tooltip("Karanlýðýn yayýlacaðý TÜM tilemap'leri buraya ekle")]
     public List<Tilemap> tilemaps;
+
+    [Header("Manual Start Cells (Corners)")]
+    [Tooltip("Karanlýðýn baþlayacaðý tile hücreleri")]
+    public List<Vector3Int> startCells;
 
     [Header("Spread Settings")]
     public float spreadDelay = 0.05f;
@@ -21,9 +24,22 @@ public class DarknessSpreadController : MonoBehaviour
 
     void Start()
     {
-        // Örnek: baþlangýç noktasý
-        // Ýstersen inspector’dan da çaðýrabilirsin
-        StartDarkness(new Vector3Int(0, 0, 0));
+        StartFromManualCells();
+    }
+
+    void StartFromManualCells()
+    {
+        foreach (Vector3Int cell in startCells)
+        {
+            if (HasTileInAnyMap(cell))
+            {
+                StartDarkness(cell);
+            }
+            else
+            {
+                Debug.LogWarning($"Start Cell boþ: {cell}");
+            }
+        }
     }
 
     public void StartDarkness(Vector3Int startCell)
@@ -44,9 +60,8 @@ public class DarknessSpreadController : MonoBehaviour
 
             foreach (Tilemap map in tilemaps)
             {
-                if (!map.HasTile(current)) continue;
-
-                StartCoroutine(LerpTileColor(map, current));
+                if (map.HasTile(current))
+                    StartCoroutine(LerpTileColor(map, current));
             }
 
             foreach (Vector3Int neighbor in GetNeighbors(current))
