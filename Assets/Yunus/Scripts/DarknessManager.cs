@@ -1,61 +1,102 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class DarknessManager : MonoBehaviour
+public class DarknessSpreadController : MonoBehaviour
 {
-    public Tilemap tilemap;
-    public Vector3Int startCell;
+    [Header("Tilemaps")]
+    [Tooltip("Karanlýðýn yayýlacaðý TÜM tilemap'leri buraya ekle")]
+    public List<Tilemap> tilemaps;
 
-    Dictionary<Vector3Int, float> darkness = new();
+    [Header("Spread Settings")]
+    public float spreadDelay = 0.05f;
+    public float colorLerpSpeed = 4f;
+
+    [Header("Darkness Color")]
+    public Color darknessColor = Color.black;
+
+    private HashSet<Vector3Int> infectedTiles = new HashSet<Vector3Int>();
+    private Queue<Vector3Int> spreadQueue = new Queue<Vector3Int>();
 
     void Start()
     {
-        foreach (var pos in tilemap.cellBounds.allPositionsWithin)
-        {
-            if (!tilemap.HasTile(pos)) continue;
+        // Örnek: baþlangýç noktasý
+        // Ýstersen inspector’dan da çaðýrabilirsin
+        StartDarkness(new Vector3Int(0, 0, 0));
+    }
 
-            darkness[pos] = 0f;
-            tilemap.SetColor(pos, Color.white);
-        }
+    public void StartDarkness(Vector3Int startCell)
+    {
+        if (infectedTiles.Contains(startCell)) return;
 
-        if (darkness.ContainsKey(startCell))
+        infectedTiles.Add(startCell);
+        spreadQueue.Enqueue(startCell);
+
+        StartCoroutine(SpreadRoutine());
+    }
+
+    IEnumerator SpreadRoutine()
+    {
+        while (spreadQueue.Count > 0)
         {
-            darkness[startCell] = 1f;
-            tilemap.SetColor(startCell, Color.black);
-        }
-        else
-        {
-            Debug.LogError("START CELL TILE YOK!");
+            Vector3Int current = spreadQueue.Dequeue();
+
+            foreach (Tilemap map in tilemaps)
+            {
+                if (!map.HasTile(current)) continue;
+
+                StartCoroutine(LerpTileColor(map, current));
+            }
+
+            foreach (Vector3Int neighbor in GetNeighbors(current))
+            {
+                if (infectedTiles.Contains(neighbor)) continue;
+
+                if (HasTileInAnyMap(neighbor))
+                {
+                    infectedTiles.Add(neighbor);
+                    spreadQueue.Enqueue(neighbor);
+                }
+            }
+
+            yield return new WaitForSeconds(spreadDelay);
         }
     }
 
-    void Update()
+    IEnumerator LerpTileColor(Tilemap map, Vector3Int cell)
     {
-        List<Vector3Int> keys = new(darkness.Keys);
+        Color startColor = map.GetColor(cell);
+        float t = 0f;
 
-        foreach (var pos in keys)
+        while (t < 1f)
         {
-            if (darkness[pos] < 1f) continue;
-
-            SpreadTo(pos + Vector3Int.up);
-            SpreadTo(pos + Vector3Int.down);
-            SpreadTo(pos + Vector3Int.left);
-            SpreadTo(pos + Vector3Int.right);
+            t += Time.deltaTime * colorLerpSpeed;
+            map.SetColor(cell, Color.Lerp(startColor, darknessColor, t));
+            yield return null;
         }
 
-        foreach (var pos in keys)
-        {
-            darkness[pos] = Mathf.MoveTowards(darkness[pos], 1f, Time.deltaTime);
-            tilemap.SetColor(pos, Color.Lerp(Color.white, Color.black, darkness[pos]));
-        }
+        map.SetColor(cell, darknessColor);
     }
 
-    void SpreadTo(Vector3Int pos)
+    bool HasTileInAnyMap(Vector3Int cell)
     {
-        if (!darkness.ContainsKey(pos)) return;
-        if (darkness[pos] > 0f) return;
+        foreach (Tilemap map in tilemaps)
+        {
+            if (map.HasTile(cell))
+                return true;
+        }
+        return false;
+    }
 
-        darkness[pos] = 0.01f;
+    List<Vector3Int> GetNeighbors(Vector3Int cell)
+    {
+        return new List<Vector3Int>
+        {
+            cell + Vector3Int.up,
+            cell + Vector3Int.down,
+            cell + Vector3Int.left,
+            cell + Vector3Int.right
+        };
     }
 }
