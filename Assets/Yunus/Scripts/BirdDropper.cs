@@ -23,9 +23,15 @@ public class BirdDropper : MonoBehaviour
     [Tooltip("vfxOnBird açıksa bu nokta kullanılır; boşsa kuşun pozisyonu kullanılır.")]
     public Transform birdVfxPoint;
 
+    [Header("SFX")]
+    public AudioSource audioSource;
+    public AudioClip dropSfx;
+    [Range(0f, 1f)] public float dropSfxVolume = 0.9f;
+
     private void Reset()
     {
         inventory = GetComponent<GemInventory>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -65,12 +71,32 @@ public class BirdDropper : MonoBehaviour
         currentZone.receiver.Receive(inventory.equippedGem);
         Debug.Log($"[DROP] Teslim edildi -> {currentZone.villageId}");
 
+        // ✅ SFX
+        PlayDropSFX();
+
         // ✅ VFX
         SpawnDropVFX();
 
         // ✅ Envanter boşalt
         if (clearInventoryAfterDrop)
             inventory.UnequipGem();
+    }
+
+    void PlayDropSFX()
+    {
+        if (audioSource == null)
+        {
+            Debug.LogWarning("[SFX] AudioSource yok! Bird objesine AudioSource ekle ve BirdDropper.audioSource'a bağla.");
+            return;
+        }
+
+        if (dropSfx == null)
+        {
+            Debug.LogWarning("[SFX] dropSfx boş! BirdDropper inspector'dan ses dosyasını bağla.");
+            return;
+        }
+
+        audioSource.PlayOneShot(dropSfx, dropSfxVolume);
     }
 
     void SpawnDropVFX()
