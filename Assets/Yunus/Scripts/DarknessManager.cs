@@ -1,53 +1,36 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class DarknessSpreadController : MonoBehaviour
 {
-    [Header("Tilemaps")]
+    [Header("All Tilemaps To Affect")]
     public List<Tilemap> tilemaps;
 
-    [Header("Manual Start Cells (Corners)")]
-    [Tooltip("Karanlýðýn baþlayacaðý tile hücreleri")]
+    [Header("Manual Start Cells")]
     public List<Vector3Int> startCells;
 
     [Header("Spread Settings")]
     public float spreadDelay = 0.05f;
-    public float colorLerpSpeed = 4f;
+    public float colorLerpSpeed = 5f;
 
     [Header("Darkness Color")]
     public Color darknessColor = Color.black;
 
-    private HashSet<Vector3Int> infectedTiles = new HashSet<Vector3Int>();
+    private HashSet<Vector3Int> visitedCells = new HashSet<Vector3Int>();
     private Queue<Vector3Int> spreadQueue = new Queue<Vector3Int>();
 
     void Start()
-    {
-        StartFromManualCells();
-    }
-
-    void StartFromManualCells()
     {
         foreach (Vector3Int cell in startCells)
         {
             if (HasTileInAnyMap(cell))
             {
-                StartDarkness(cell);
-            }
-            else
-            {
-                Debug.LogWarning($"Start Cell boþ: {cell}");
+                visitedCells.Add(cell);
+                spreadQueue.Enqueue(cell);
             }
         }
-    }
-
-    public void StartDarkness(Vector3Int startCell)
-    {
-        if (infectedTiles.Contains(startCell)) return;
-
-        infectedTiles.Add(startCell);
-        spreadQueue.Enqueue(startCell);
 
         StartCoroutine(SpreadRoutine());
     }
@@ -58,19 +41,23 @@ public class DarknessSpreadController : MonoBehaviour
         {
             Vector3Int current = spreadQueue.Dequeue();
 
+            // ðŸ”¥ O HÃœCREDE TILE OLAN TÃœM TILEMAPâ€™LERÄ° KARART
             foreach (Tilemap map in tilemaps)
             {
                 if (map.HasTile(current))
+                {
                     StartCoroutine(LerpTileColor(map, current));
+                }
             }
 
+            // KomÅŸular
             foreach (Vector3Int neighbor in GetNeighbors(current))
             {
-                if (infectedTiles.Contains(neighbor)) continue;
+                if (visitedCells.Contains(neighbor)) continue;
 
                 if (HasTileInAnyMap(neighbor))
                 {
-                    infectedTiles.Add(neighbor);
+                    visitedCells.Add(neighbor);
                     spreadQueue.Enqueue(neighbor);
                 }
             }
