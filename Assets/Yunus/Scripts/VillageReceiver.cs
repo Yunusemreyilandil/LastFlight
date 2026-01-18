@@ -1,9 +1,22 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class VillageReceiver : MonoBehaviour
 {
     [Header("State")]
     public bool isFilled = false;
+
+    [Header("Hint (optional)")]
+    public GameObject gemHint; // Köy üstündeki pulse gem ikonu (GemHint child)
+
+    private void Awake()
+    {
+        // Eğer Inspector'dan bağlamadıysan otomatik bulmaya çalışsın
+        if (gemHint == null)
+        {
+            Transform t = transform.Find("GemHint");
+            if (t != null) gemHint = t.gameObject;
+        }
+    }
 
     public bool CanReceive()
     {
@@ -15,8 +28,12 @@ public class VillageReceiver : MonoBehaviour
         if (isFilled) return;
 
         isFilled = true;
-        Debug.Log($"K�y gem ald�: {(gem != null ? gem.gemName : "null")}");
+        Debug.Log($"Köy gem aldı: {(gem != null ? gem.gemName : "null")}");
 
-        // Sonra buraya: k�y renklenme / VFX koyaca��z
+        // ✅ Gem teslim edilince yönlendirme ikonunu kapat
+        if (gemHint != null)
+            gemHint.SetActive(false);
+
+        // Sonra buraya: köy renklenme / VFX koyacağız
     }
 }
